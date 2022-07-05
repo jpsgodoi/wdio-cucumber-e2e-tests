@@ -4,5 +4,6 @@ Feature: Web interactions
     Scenario: Demo test
 
         Given the web interactions page is opened
-        When the user performs web interactions
+        # When the user performs input web interactions
+        And the user performs dropdown web interactions
 

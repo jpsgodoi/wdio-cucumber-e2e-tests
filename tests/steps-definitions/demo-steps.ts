@@ -5,7 +5,6 @@ Given(/^google page is opened$/, async function () {
     await browser.url("https://www.google.com");
     let acceptCookie = await $('(//button)[4]');
     await acceptCookie.click();
-    await browser.pause(7000);
 });
 
 When(/^the user searches with (.*)$/, async function (searchItem: string) {

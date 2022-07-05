@@ -1,6 +1,5 @@
 Feature: Demo feature
 
-    @Demo
     Scenario Outline: Demo test
 
         Given google page is opened

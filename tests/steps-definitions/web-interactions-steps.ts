@@ -12,7 +12,8 @@ When(/^the user performs input web interactions$/, async function () {
      * 1. Input box
      */
     // navigate to the interactions page
-    await driver.url(await browser.getUrl() + "inputs");
+    let baseUrl = await browser.getUrl();
+    await $("=Inputs").click();
 
     let inputBox = await $("input[type=number]");
 
@@ -33,6 +34,7 @@ When(/^the user performs input web interactions$/, async function () {
         await browser.pause(500);
     }
     await browser.pause(2000);
+    await driver.url(baseUrl);
 });
 
 When(/^the user performs dropdown web interactions$/, async function () {
@@ -40,7 +42,8 @@ When(/^the user performs dropdown web interactions$/, async function () {
      * 2. Dropdown
      */
     // navigate to the interactions page
-    await driver.url(await browser.getUrl() + "dropdown");
+    let baseUrl = await browser.getUrl();
+    await $("=Dropdown").click();
 
     let dropdown = await $("#dropdown");
     let dropdownDefault = await $("[id='dropdown'] [selected='selected']");
@@ -61,6 +64,9 @@ When(/^the user performs dropdown web interactions$/, async function () {
     }
     let expectedOptions = ['Please select an option', 'Option 1', 'Option 2'];
     chai.expect(arr).to.have.all.members(expectedOptions);
+
+    await browser.pause(2000);
+    await driver.url(baseUrl);
 });
 
 When(/^the user performs checkbox web interactions$/, async function () {
@@ -68,7 +74,8 @@ When(/^the user performs checkbox web interactions$/, async function () {
      * 3. Checkbox
      */
     // navigate to the interactions page
-    await driver.url(await browser.getUrl() + "checkboxes");
+    let baseUrl = await browser.getUrl();
+    await $("=Checkboxes").click();
 
     // if not selected, go and select it
     let checkboxOption1 = await $("(//input[@type='checkbox'])[1]");
@@ -77,7 +84,8 @@ When(/^the user performs checkbox web interactions$/, async function () {
         await checkboxOption1.click();
     }
 
-    await browser.pause(3000)
+    await browser.pause(2000);
+    await driver.url(baseUrl);
 });
 
 When(/^the user performs windows handling web interactions$/, async function () {
@@ -85,7 +93,8 @@ When(/^the user performs windows handling web interactions$/, async function () 
      * 4. Windows handling
      */
     // navigate to the interactions page
-    await driver.url(await browser.getUrl() + "windows");
+    let baseUrl = await browser.getUrl();
+    await $("=Multiple Windows").click();
 
     let parentWindow = await browser.getWindowHandle();
 
@@ -108,7 +117,8 @@ When(/^the user performs windows handling web interactions$/, async function () 
     let winEle = await $("h3").getText();
     chai.expect(winEle).to.equal("Opening a new window");
 
-    await browser.pause(3000)
+    await browser.pause(2000);
+    await driver.url(baseUrl);
 });
 
 When(/^the user performs handling alerts web interactions$/, async function () {
@@ -116,7 +126,8 @@ When(/^the user performs handling alerts web interactions$/, async function () {
      * 5. Handling alerts
      */
     // navigate to the interactions page
-    await driver.url(await browser.getUrl() + "javascript_alerts");
+    let baseUrl = await browser.getUrl();
+    await $("=JavaScript Alerts").click();
 
     await $(`button=Click for JS Alert`).click();
     if (await browser.isAlertOpen()) {
@@ -131,13 +142,16 @@ When(/^the user performs handling alerts web interactions$/, async function () {
         await browser.pause(2000);
         await browser.dismissAlert();
     }
-    
+
     await $(`button=Click for JS Prompt`).click();
     if (await browser.isAlertOpen()) {
         await browser.sendAlertText("Webdriver IO testing");
         await browser.acceptAlert();
-        await browser.pause(2000)
+        await browser.pause(2000);
     }
+
+    await browser.pause(2000);
+    await driver.url(baseUrl);
 });
 
 When(/^the user performs file upload web interactions$/, async function () {
@@ -145,8 +159,87 @@ When(/^the user performs file upload web interactions$/, async function () {
      * 6. File upload
      */
     // navigate to the interactions page
-    await driver.url(await browser.getUrl() + "");
+    let baseUrl = await browser.getUrl();
+    await $("=File Upload").click();
 
+    console.log(process.cwd());
 
+    await $(`#file-upload`).addValue(`${process.cwd()}/data/file-upload/Iron_Man.jpg`);
+    await $(`#file-submit`).click();
 
+    await browser.pause(2000);
+    await driver.url(baseUrl);
+});
+
+When(/^the user performs frames web interactions$/, async function () {
+    /**
+     * 7. Frames
+     */
+    // navigate to the interactions page
+    let baseUrl = await browser.getUrl();
+    await $("=Frames").click();
+
+    // Switch to frame and type text
+    await $(`=iFrame`).click();
+    let frame = await $(`#mce_0_ifr`);
+    await browser.switchToFrame(frame);
+    await $(`#tinymce`).setValue(`New Text!!`);
+
+    // Swtich to parent frame
+    await browser.switchToParentFrame();
+    let title = await $(`.example h3`).getText();
+    chai.expect(title).to.equals(`An iFrame containing the TinyMCE WYSIWYG Editor`);
+
+    await browser.pause(2000);
+    await driver.url(baseUrl);
+});
+
+When(/^the user performs scrolling web interactions$/, async function () {
+    /**
+     * 8. Scrolling
+     */
+    // navigate to the interactions page
+    await $(`a=Elemental Selenium`).scrollIntoView();
+
+    await browser.pause(2000);
+});
+
+When(/^the user performs web table interactions$/, async function () {
+    /**
+     * 9. Web tables
+     */
+    // navigate to the interactions page
+    let baseUrl = await browser.getUrl();
+    await $("=Sortable Data Tables").click();
+
+    // check number of rows and columns
+    let tableRows = await $$(`[id=table1] tbody tr`);
+    let tableColumns = await $$(`[id=table1] thead tr th[class=header]`);
+
+    console.log(`>>> This is the number of rows: ${tableRows.length}`);
+    chai.expect(tableRows.length).to.equal(4);
+    console.log(`>>> This is the number of columns: ${tableColumns.length}`);
+    chai.expect(tableColumns.length).to.equal(6);
+
+    // log each cell value
+    let finalArr = []
+    let tableObj = {}
+
+    for (let row = 1; row <= tableRows.length; row++) {
+        for (let col = 1; col <= tableColumns.length; col++) {
+            let column = await $(`//table[@id="table1"]/thead/tr/th[${col}]/span`).getText();
+            let cell = await $(`//table[@id="table1"]/tbody/tr[${row}]/td[${col}]`).getText();
+            tableObj[column] = cell;
+        }
+
+        if (tableObj['Last Name'] == "Smith" && tableObj['First Name'] == "John") {
+            finalArr.push(tableObj)
+            break;
+        }
+
+    }
+
+    console.log(JSON.stringify(finalArr))
+
+    await driver.url(baseUrl);
 });

@@ -2,7 +2,8 @@ import { Given, When, Then } from "@wdio/cucumber-framework";
 import chai from "chai";
 
 Given(/^google page is opened$/, async function () {
-    await browser.url("https://www.google.com");
+    // @ts-ignore
+    await browser.url(browser.config.googlePage);
     let acceptCookie = await $('(//button)[4]');
     await acceptCookie.click();
 });

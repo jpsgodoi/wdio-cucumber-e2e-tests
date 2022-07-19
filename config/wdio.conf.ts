@@ -1,6 +1,11 @@
-import type { Options } from '@wdio/types'
+import dotenv from "dotenv"
 
-export const config: Options.Testrunner = {
+dotenv.config()
+
+let headless = process.env.HEADLESS.trim()
+let debug = process.env.DEBUG.trim()
+
+export const config: WebdriverIO.Config = {
     //
     // ====================
     // Runner Configuration
@@ -86,12 +91,13 @@ export const config: Options.Testrunner = {
         maxInstances: 5,
         //
         browserName: 'chrome',
-        "goog:chromeOptions":{
-            args: ["--disable-web-security"]
+        "goog:chromeOptions": {
+            args: headless === 'Y' ? ["--disable-web-security", "--headless", "--disable-dev-shm-usage", "--no-sandbox", "--window-size=1920,1080", "--disable-gpu"] : []
         },
+
         acceptInsecureCerts: true,
         timeouts: {
-            "implicit": 5000,
+            "implicit": 2000,
             "pageLoad": 20000,
             "script": 30000
         },
@@ -107,7 +113,8 @@ export const config: Options.Testrunner = {
     // Define all options that are relevant for the WebdriverIO instance here
     //
     // Level of logging verbosity: trace | debug | info | warn | error | silent
-    logLevel: 'error',
+    
+    logLevel: debug === "Y" ? "info" : "error",
     //
     // Set specific log levels per logger
     // loggers:

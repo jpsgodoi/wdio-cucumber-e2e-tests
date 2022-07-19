@@ -22,6 +22,11 @@ When(/^the user clicks the first search result$/, async function () {
 
 Then(/^the URL should match (.*)$/, async function (expectedUrl: string) {
     console.log(`Expected URL --> ${expectedUrl}`);
+
+    await browser.waitUntil(async function() {
+        return await browser.getTitle() === "WebdriverIO · Next-gen browser and mobile automation test framework for Node.js | WebdriverIO"
+    }, {timeout: 2000, interval: 500, timeoutMsg: `Failed to load the page`});
+
     let actualUrl = await browser.getUrl();
     chai.expect(actualUrl).to.equal(expectedUrl);
 });

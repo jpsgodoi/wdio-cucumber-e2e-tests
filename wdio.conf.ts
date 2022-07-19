@@ -79,14 +79,22 @@ export const config: Options.Testrunner = {
     // https://saucelabs.com/platform/platform-configurator
     //
     capabilities: [{
-    
+
         // maxInstances can get overwritten per capability. So if you have an in-house Selenium
         // grid with only 5 firefox instances available you can make sure that not more than
         // 5 instances get started at a time.
         maxInstances: 5,
         //
         browserName: 'chrome',
-        acceptInsecureCerts: true
+        "goog:chromeOptions":{
+            args: ["--disable-web-security"]
+        },
+        acceptInsecureCerts: true,
+        timeouts: {
+            "implicit": 5000,
+            "pageLoad": 20000,
+            "script": 30000
+        },
         // If outputDir is provided WebdriverIO can capture driver session logs
         // it is possible to configure which logTypes to include/exclude.
         // excludeDriverLogs: ['*'], // pass '*' to exclude all driver session logs
@@ -126,7 +134,7 @@ export const config: Options.Testrunner = {
     baseUrl: 'http://localhost',
     //
     // Default timeout for all waitFor* commands.
-    waitforTimeout: 10000,
+    waitforTimeout: 5000,
     //
     // Default timeout in milliseconds for request
     // if browser driver or grid doesn't send response
@@ -139,8 +147,8 @@ export const config: Options.Testrunner = {
     // Services take over a specific job you don't want to take care of. They enhance
     // your test setup with almost no effort. Unlike plugins, they don't add new
     // commands. Instead, they hook themselves up into the test process.
-    services: ['chromedriver','sauce'],
-    
+    services: ['chromedriver', 'sauce'],
+
     // Framework you want to run your specs with.
     // The following are supported: Mocha, Jasmine, and Cucumber
     // see also: https://webdriver.io/docs/frameworks
@@ -161,7 +169,7 @@ export const config: Options.Testrunner = {
     // Test reporter for stdout.
     // The only one supported by default is 'dot'
     // see also: https://webdriver.io/docs/dot-reporter
-    reporters: ['spec',['allure', {outputDir: 'allure-results'}]],
+    reporters: ['spec', ['allure', { outputDir: 'allure-results' }]],
 
 
     //
@@ -184,13 +192,13 @@ export const config: Options.Testrunner = {
         // <boolean> fail if there are any undefined or pending steps
         strict: false,
         // <string> (expression) only execute the features or scenarios with tags matching the expression
-        tagExpression: '@demo',
+        tagExpression: "",
         // <number> timeout for step definitions
-        timeout: 60000,
+        timeout: 200000,
         // <boolean> Enable this config to treat undefined definitions as warnings.
         ignoreUndefinedDefinitions: false
     },
-    
+
     //
     // =====
     // Hooks
@@ -311,7 +319,7 @@ export const config: Options.Testrunner = {
      */
     // afterFeature: function (uri, feature) {
     // },
-    
+
     /**
      * Runs after a WebdriverIO command gets executed
      * @param {String} commandName hook command name

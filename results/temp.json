@@ -1,0 +1,157 @@
+{
+    "sessionId": "aa95cd402d77f76f1373cfeabe124ae9",
+    "capabilities": {
+        "acceptInsecureCerts": true,
+        "browserName": "chrome",
+        "browserVersion": "103.0.5060.114",
+        "chrome": {
+            "chromedriverVersion": "103.0.5060.53 (a1711811edd74ff1cf2150f36ffa3b0dae40b17f-refs/branch-heads/5060@{#853})",
+            "userDataDir": "C:\\Users\\doi\\AppData\\Local\\Temp\\scoped_dir18232_1603462382"
+        },
+        "goog:chromeOptions": {
+            "debuggerAddress": "localhost:54652"
+        },
+        "networkConnectionEnabled": false,
+        "pageLoadStrategy": "normal",
+        "platformName": "windows",
+        "proxy": {},
+        "setWindowRect": true,
+        "strictFileInteractability": false,
+        "timeouts": {
+            "implicit": 15000,
+            "pageLoad": 20000,
+            "script": 30000
+        },
+        "unhandledPromptBehavior": "dismiss and notify",
+        "webauthn:extension:credBlob": true,
+        "webauthn:extension:largeBlob": true,
+        "webauthn:virtualAuthenticators": true
+    },
+    "config": {
+        "specs": [
+            "./tests/features/*/*.feature"
+        ],
+        "suites": {},
+        "exclude": [],
+        "logLevel": "error",
+        "logLevels": {},
+        "excludeDriverLogs": [],
+        "bail": 0,
+        "waitforInterval": 500,
+        "waitforTimeout": 5000,
+        "framework": "cucumber",
+        "reporters": [
+            "spec",
+            [
+                "allure",
+                {
+                    "outputDir": "allure-results"
+                }
+            ]
+        ],
+        "services": [
+            "chromedriver",
+            "sauce"
+        ],
+        "maxInstances": 10,
+        "maxInstancesPerCapability": 100,
+        "filesToWatch": [],
+        "connectionRetryTimeout": 120000,
+        "connectionRetryCount": 3,
+        "execArgv": [],
+        "runnerEnv": {},
+        "runner": "local",
+        "specFileRetries": 0,
+        "specFileRetriesDelay": 0,
+        "specFileRetriesDeferred": false,
+        "reporterSyncInterval": 100,
+        "reporterSyncTimeout": 5000,
+        "cucumberFeaturesWithLineNumbers": [],
+        "autoCompileOpts": {
+            "autoCompile": true,
+            "tsNodeOpts": {
+                "transpileOnly": true,
+                "project": "tsconfig.json"
+            },
+            "babelOpts": {}
+        },
+        "mochaOpts": {
+            "timeout": 10000
+        },
+        "jasmineOpts": {
+            "defaultTimeoutInterval": 10000
+        },
+        "cucumberOpts": {
+            "timeout": 200000,
+            "require": [
+                "./tests/steps-definitions/*.ts"
+            ],
+            "backtrace": false,
+            "requireModule": [],
+            "dryRun": false,
+            "failFast": false,
+            "snippets": true,
+            "source": true,
+            "strict": false,
+            "tagExpression": "@demo",
+            "ignoreUndefinedDefinitions": false
+        },
+        "onPrepare": [],
+        "onWorkerStart": [],
+        "onWorkerEnd": [],
+        "before": [
+            null
+        ],
+        "beforeSession": [
+            null
+        ],
+        "beforeSuite": [
+            null
+        ],
+        "beforeHook": [],
+        "beforeTest": [
+            null
+        ],
+        "beforeCommand": [],
+        "afterCommand": [],
+        "afterTest": [
+            null
+        ],
+        "afterHook": [
+            null
+        ],
+        "afterSuite": [
+            null
+        ],
+        "afterSession": [],
+        "after": [
+            null
+        ],
+        "onComplete": [],
+        "onReload": [
+            null
+        ],
+        "beforeFeature": [
+            null
+        ],
+        "beforeScenario": [
+            null
+        ],
+        "beforeStep": [
+            null
+        ],
+        "afterStep": [],
+        "afterScenario": [
+            null
+        ],
+        "afterFeature": [],
+        "baseUrl": "http://localhost",
+        "_": [
+            "wdio.conf.ts"
+        ],
+        "$0": "node_modules\\@wdio\\cli\\bin\\wdio.js",
+        "ignoredWorkerServices": [],
+        "user": "unknown_user",
+        "key": "unknown_key"
+    }
+}

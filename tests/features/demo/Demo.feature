@@ -1,5 +1,6 @@
 Feature: Demo feature
 
+    @demo @smoke
     Scenario Outline: Demo test
 
         Given google page is opened

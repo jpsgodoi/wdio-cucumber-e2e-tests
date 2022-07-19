@@ -3,12 +3,31 @@ import chai from "chai";
 
 Given(/^the user is logged in the inventory app$/, async function () {
     await browser.url("https://www.saucedemo.com/");
-    await browser.setTimeout({ implicit: 10000, pageLoad: 5000 })
-    await browser.maximizeWindow()
+    
+    // // Example with Refresh
+    // try {
+    //     await $(`#user-nam`).setValue("standard_user");
+    //     await $(`#password`).setValue("secret_sauce");
+    //     await $(`#login-button`).click();
+    // } catch (err) {
+    //     console.log(`Error trying to login, retrying.....`) 
+    //     await browser.pause(1000);
+    //     await browser.refresh();
+    //     await $(`#user-name`).setValue("standard_user");
+    //     await $(`#password`).setValue("secret_sauce");
+    //     await $(`#login-button`).click();
+    // }
 
-    await $(`#user-name`).setValue("standard_user");
+    // Example with Reload Session
+    await browser.pause(1000);
+    await browser.reloadSession();
+
+    await browser.url("https://www.saucedemo.com/");
+    await $(`#user-name`).setValue("problem_user");
     await $(`#password`).setValue("secret_sauce");
     await $(`#login-button`).click();
+
+    await browser.pause(1000);
 });
 
 Then(/^inventory page displays (.*) records$/, async function (numProducts) {

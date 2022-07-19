@@ -1,5 +1,6 @@
 Feature: Inventory
 
+    @smoke
     Scenario: Inventory demo
 
         Given the user is logged in the inventory app

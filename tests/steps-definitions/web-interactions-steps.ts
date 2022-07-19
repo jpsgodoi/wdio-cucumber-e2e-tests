@@ -1,5 +1,6 @@
 import { Given, When } from "@wdio/cucumber-framework";
 import chai from "chai";
+import { camelCase } from "../helpers/convert-case";
 
 Given(/^the web interactions page is opened$/, async function () {
     await browser.url("https://the-internet.herokuapp.com");
@@ -221,25 +222,35 @@ When(/^the user performs web table interactions$/, async function () {
     console.log(`>>> This is the number of columns: ${tableColumns.length}`);
     chai.expect(tableColumns.length).to.equal(6);
 
-    // log each cell value
-    let finalArr = []
-    let tableObj = {}
+    let fullArr = []
+    let scenario1Arr = []
+    let scenario2Arr = []
 
+    // get all columns and rows from the table
     for (let row = 1; row <= tableRows.length; row++) {
+        let tableObj = {}
         for (let col = 1; col <= tableColumns.length; col++) {
             let column = await $(`//table[@id="table1"]/thead/tr/th[${col}]/span`).getText();
             let cell = await $(`//table[@id="table1"]/tbody/tr[${row}]/td[${col}]`).getText();
-            tableObj[column] = cell;
+            // convert key to camel case for json convention
+            tableObj[camelCase(column)] = cell;
+        }
+        fullArr.push(tableObj)
+
+        // get a specific row based on value
+        if (tableObj['lastName'] == "Smith" && tableObj['firstName'] == "John") {
+            scenario1Arr.push(tableObj)
         }
 
-        if (tableObj['Last Name'] == "Smith" && tableObj['First Name'] == "John") {
-            finalArr.push(tableObj)
-            break;
+        // get last and first name with due greater than
+        if (+(tableObj['due'].replace("$", "")) > 50) {
+            scenario2Arr.push(tableObj)
         }
 
     }
-
-    console.log(JSON.stringify(finalArr))
+    console.log(JSON.stringify(fullArr))
+    console.log(JSON.stringify(scenario1Arr))
+    console.log(JSON.stringify(scenario2Arr))
 
     await driver.url(baseUrl);
 });

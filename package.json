@@ -4,7 +4,7 @@
     "description": "Wdio e2e tests",
     "main": "index.js",
     "scripts": {
-        "test:debug": "set DEBUG=Y && set HEADLESS=N && npx wdio config/wdio.test.conf.ts --cucumberOpts.tagExpression='@demo'",
+        "test:debug": "set DEBUG=Y && set HEADLESS=N && npx wdio config/wdio.test.conf.ts --cucumberOpts.tagExpression='@FeatureTag'",
         "test:demo": "set DEBUG=N && set HEADLESS=N && npx wdio config/wdio.test.conf.ts --cucumberOpts.tagExpression='@demo'",
         "test:smoke": "set DEBUG=N && set HEADLESS=Y && npx wdio config/wdio.test.conf.ts --cucumberOpts.tagExpression='@smoke'",
         "uat:demo": "set DEBUG=N && set HEADLESS=N && npx wdio config/wdio.uat.conf.ts --cucumberOpts.tagExpression='@demo'",

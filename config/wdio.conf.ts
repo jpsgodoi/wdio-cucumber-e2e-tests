@@ -113,7 +113,7 @@ export const config: WebdriverIO.Config = {
     // Define all options that are relevant for the WebdriverIO instance here
     //
     // Level of logging verbosity: trace | debug | info | warn | error | silent
-    
+
     logLevel: debug === "Y" ? "info" : "error",
     //
     // Set specific log levels per logger
@@ -282,8 +282,16 @@ export const config: WebdriverIO.Config = {
      * @param {ITestCaseHookParameter} world    world object containing information on pickle and test step
      * @param {Object}                 context  Cucumber World object
      */
-    // beforeScenario: function (world, context) {
-    // },
+    beforeScenario: function (world, context) {
+
+        console.log(`>>> Starting scenario: ${world.pickle.name} <<<`)
+
+        let scenarioNameSplit = world.pickle.name.split(/:/);
+        if (scenarioNameSplit.length > 0) {
+            // @ts-ignore
+            context.testId = scenarioNameSplit[0];
+        }
+    },
     /**
      *
      * Runs before a Cucumber Step.
@@ -291,8 +299,11 @@ export const config: WebdriverIO.Config = {
      * @param {IPickle}            scenario scenario pickle
      * @param {Object}             context  Cucumber World object
      */
-    // beforeStep: function (step, scenario, context) {
-    // },
+    beforeStep: function (step, scenario, context) {
+
+        console.log(JSON.stringify(step))
+        console.log(`>> Step: ${step.text} <<`)
+    },
     /**
      *
      * Runs after a Cucumber Step.
@@ -304,8 +315,11 @@ export const config: WebdriverIO.Config = {
      * @param {number}             result.duration  duration of scenario in milliseconds
      * @param {Object}             context          Cucumber World object
      */
-    // afterStep: function (step, scenario, result, context) {
-    // },
+    afterStep: async function (step, scenario, result) {
+        if (!result.passed) {
+            await browser.takeScreenshot()
+        }
+    },
     /**
      *
      * Runs after a Cucumber Scenario.

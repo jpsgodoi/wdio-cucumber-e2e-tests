@@ -1,6 +1,6 @@
 import { config as baseConfig } from "./wdio.conf"
 
-Object.assign(baseConfig, {
+export const config = Object.assign(baseConfig, {
 
     environment: "UAT",
     sauceDemoURL: "https://www.saucedemo.com",

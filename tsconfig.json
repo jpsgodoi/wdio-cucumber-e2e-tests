@@ -9,6 +9,8 @@
         ],
         "target": "es2019",
         "moduleResolution": "Node",
-        "module": "CommonJS"
+        "module": "CommonJS",
+        "resolveJsonModule": true,
+        "suppressExcessPropertyErrors": true
     }
 }

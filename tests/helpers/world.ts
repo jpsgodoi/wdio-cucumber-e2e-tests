@@ -1,5 +1,4 @@
 import { setWorldConstructor } from "@wdio/cucumber-framework";
-import chai from "chai";
 
 class CustomWorld {
     appId: string

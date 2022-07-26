@@ -9,5 +9,5 @@ Feature: Demo feature
         Then the URL should match <ExpectedURL>
 
         Examples:
-            | TestCase | SearchItem | ExpectedURL           |
-            | JIRA-01  | WDIO       | https://webdriver.io/ |
+            | TestCase | SearchItem  | ExpectedURL           |
+            | JIRA-01  | WEBDRIVERIO | https://webdriver.io/ |

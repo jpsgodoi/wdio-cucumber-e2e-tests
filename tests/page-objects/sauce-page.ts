@@ -1,5 +1,4 @@
 import Page from "./page"
-import chai from "chai"
 import reporter from "../helpers/reporter"
 
 class SaucePage extends Page {

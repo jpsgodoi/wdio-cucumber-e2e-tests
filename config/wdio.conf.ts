@@ -5,8 +5,10 @@ import fs from "fs"
 
 dotenv.config()
 
-let headless = process.env.HEADLESS.trim()
-let debug = process.env.DEBUG.trim()
+let headless = process.env.HEADLESS
+let debug = process.env.DEBUG
+headless = headless.trim()
+debug = debug.trim()
 
 export const config: WebdriverIO.Config = {
     //

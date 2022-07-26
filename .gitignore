@@ -2,6 +2,7 @@
 allure-results
 debug
 package-lock.json
+results
 
 # Logs
 logs

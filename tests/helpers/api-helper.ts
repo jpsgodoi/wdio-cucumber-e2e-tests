@@ -18,7 +18,6 @@ async function GET(testId: string, baseUrl: string, endpoint: string, authToken:
             .auth(authToken, { type: "bearer" })
             .set("Content-type", "application/json")
             .set("Accept", "application/json")
-        console.log(JSON.stringify(res.body))
     } catch (err) {
         err.message = `Error performing a GET call to ${baseUrl}${endpoint} >> ${err.message}`
         throw err

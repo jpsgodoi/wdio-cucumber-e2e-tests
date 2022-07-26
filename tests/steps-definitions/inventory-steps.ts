@@ -10,7 +10,7 @@ Given(/^the user is logged in the inventory app$/, async function () {
     try {
         // @ts-ignore
         await SaucePage.navigateTo(browser.config.sauceDemoURL);
-        await SaucePage.enterUsername(this.testId, process.env.TEST_PROB_USER);
+        await SaucePage.enterUsername(this.testId, process.env.TEST_STD_USER);
         await SaucePage.enterPassword(this.testId, process.env.TEST_PASSWORD);
         await SaucePage.clickLoginBtn(this.testId);
     } catch (err) {

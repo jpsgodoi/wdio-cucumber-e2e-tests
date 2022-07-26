@@ -1,6 +1,6 @@
 Feature: Inventory
 
-    @inventory
+    @smoke @inventory
     Scenario Outline: TESTID-5678: Inventory datatable login demo
 
         Given the Username is logged in the inventory app

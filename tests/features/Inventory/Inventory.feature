@@ -1,6 +1,6 @@
 Feature: Inventory
 
-    @demo @smoke @inventory
+    @smoke @inventory
     Scenario: TESTID-1234: Inventory demo
 
         Given the user is logged in the inventory app

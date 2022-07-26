@@ -15,6 +15,7 @@ jobs:
     runs-on: ubuntu-latest
     env:
       RUNNER: ${{secrets.RUNNER}}
+      HEADLESS: ${{secrets.HEADLESS}}
       LOG_LEVEL: ${{secrets.LOG_LEVEL}}
       TEST_STD_USER: ${{secrets.TEST_STD_USER}}
       TEST_PASSWORD: ${{secrets.TEST_PASSWORD}}

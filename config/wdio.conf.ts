@@ -5,11 +5,6 @@ import fs from "fs"
 
 dotenv.config()
 
-let headless = process.env.HEADLESS
-let debug = process.env.DEBUG
-headless = headless.trim()
-debug = debug.trim()
-
 export const config: WebdriverIO.Config = {
     //
     // ====================
@@ -93,7 +88,7 @@ export const config: WebdriverIO.Config = {
             maxInstances: 5,
             browserName: 'chrome',
             "goog:chromeOptions": {
-                args: headless === 'Y' ? ["--disable-web-security", "--headless", "--disable-dev-shm-usage", "--no-sandbox", "--window-size=1920,1080", "--disable-gpu"] : []
+                args: process.env.HEADLESS === 'Y' ? ["--disable-web-security", "--headless", "--disable-dev-shm-usage", "--no-sandbox", "--window-size=1920,1080", "--disable-gpu"] : []
             },
 
             acceptInsecureCerts: true,
@@ -114,7 +109,7 @@ export const config: WebdriverIO.Config = {
     //
     // Level of logging verbosity: trace | debug | info | warn | error | silent
 
-    logLevel: debug === "Y" ? "info" : "error",
+    logLevel: "error",
     //
     // Set specific log levels per logger
     // loggers:

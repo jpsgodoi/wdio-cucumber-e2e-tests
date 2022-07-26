@@ -4,12 +4,9 @@
     "description": "Wdio e2e tests",
     "main": "index.js",
     "scripts": {
-        "test:debug": "set DEBUG=Y && set HEADLESS=N && npx wdio config/wdio.test.conf.ts --cucumberOpts.tagExpression='@demo' > logs/output.log",
-        "test:demo": "set DEBUG=N && set HEADLESS=N && npx wdio config/wdio.test.conf.ts --cucumberOpts.tagExpression='@demo'",
-        "test:smoke": "set DEBUG=N && set HEADLESS=Y && npx wdio config/wdio.test.conf.ts --cucumberOpts.tagExpression='@smoke'",
-        "test:e2e": "set DEBUG=N && set HEADLESS=N && npx wdio config/wdio.test.conf.ts --cucumberOpts.tagExpression='@e2e'",
-        "uat:demo": "set DEBUG=N && set HEADLESS=N && npx wdio config/wdio.uat.conf.ts --cucumberOpts.tagExpression='@demo'",
-        "uat:smoke": "set DEBUG=N && set HEADLESS=Y && npx wdio config/wdio.uat.conf.ts --cucumberOpts.tagExpression='@smoke'"
+        "test:demo": "npx wdio config/wdio.test.conf.ts --cucumberOpts.tagExpression='@demo'",
+        "test:smoke": "npx wdio config/wdio.test.conf.ts --cucumberOpts.tagExpression='@smoke'",
+        "test:e2e": "npx wdio config/wdio.test.conf.ts --cucumberOpts.tagExpression='@e2e'"
     },
     "keywords": [
         "wdio",

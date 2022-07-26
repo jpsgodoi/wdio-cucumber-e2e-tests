@@ -1,0 +1,8 @@
+{
+    "REQRES": {
+        "LIST_USERS": "/api/users",
+        "QUERY_PARAM": {
+            "pages": 2
+        }
+    }
+}

@@ -24,14 +24,10 @@ npm -v   (should display 8.1.2)
 - Download VSCode https://code.visualstudio.com/download
 - Download Git https://git-scm.com/downloads
 
-
-## Setup Instructions
-- Create a folder ex: (C:\Users\doi\Repos\<project-name>)
-- Open folder in command line 
-- Create the package.json file, type: npm init
-- Trigger the @wdio/cli package installer wizard, type: npm init wdio .
-- Answer the questions
-
+Install dependencies
+```sh
+npm install --only=dev
+```
 
 ## Install VSCode extensions
 | Name | Description |
